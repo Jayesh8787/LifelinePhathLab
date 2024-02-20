@@ -1,24 +1,36 @@
 package com.lifelinepathlab.model;
 
+import java.util.Collection;
+
 import java.util.Date;
+
+import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.userdetails.UserDetails;
+
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.Table;
-import jakarta.validation.constraints.Email;
-
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
+@Getter
+@Setter
+@NoArgsConstructor
+@AllArgsConstructor
 
 @Entity
 @Table(name="UserDetails")
-public class User {
+public class User implements UserDetails {
 	
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private int userId;
+	private String uuid;
 	private String firstName;
 	private String lastName;
-	@Email(message = "Please provide a valid email address")
 	private String emailId;
 	private String contactNo;
 	private Date dateOfBirth;
@@ -26,121 +38,55 @@ public class User {
 	private String bloodGroup;
 	private String address;
 	private String password;
-	private String confirmPassword;
+	private String role="USER";
 	
-	public User() {
 	
-	}
-
-	public User(int userId, String firstName, String lastName, String emailId, String contactNo, Date dateOfBirth,
-			String gender, String bloodGroup, String address, String password, String confirmPassword) {
-		this.userId = userId;
-		this.firstName = firstName;
-		this.lastName = lastName;
-		this.emailId = emailId;
-		this.contactNo = contactNo;
-		this.dateOfBirth = dateOfBirth;
-		this.gender = gender;
-		this.bloodGroup = bloodGroup;
-		this.address = address;
-		this.password = password;
-		this.confirmPassword = confirmPassword;
-	}
-
 	public int getUserId() {
-		return userId;
-	}
-
-	public void setUserId(int userId) {
-		this.userId = userId;
-	}
-
-	public String getFirstName() {
-		return firstName;
-	}
-
-	public void setFirstName(String firstName) {
-		this.firstName = firstName;
-	}
-
-	public String getLastName() {
-		return lastName;
-	}
-
-	public void setLastName(String lastName) {
-		this.lastName = lastName;
-	}
-
-	public String getEmailId() {
-		return emailId;
-	}
-
-	public void setEmailId(String emailId) {
-		this.emailId = emailId;
-	}
-
-	public String getContactNo() {
-		return contactNo;
-	}
-
-	public void setContactNo(String contactNo) {
-		this.contactNo = contactNo;
-	}
-
-	public Date getDateOfBirth() {
-		return dateOfBirth;
-	}
-
-	public void setDateOfBirth(Date dateOfBirth) {
-		this.dateOfBirth = dateOfBirth;
-	}
-
-	public String getGender() {
-		return gender;
-	}
-
-	public void setGender(String gender) {
-		this.gender = gender;
-	}
-
-	public String getBloodGroup() {
-		return bloodGroup;
-	}
-
-	public void setBloodGroup(String bloodGroup) {
-		this.bloodGroup = bloodGroup;
-	}
-
-	public String getAddress() {
-		return address;
-	}
-
-	public void setAddress(String address) {
-		this.address = address;
-	}
-
-	public String getPassword() {
-		return password;
-	}
-
-	public void setPassword(String password) {
-		this.password = password;
-	}
-
-	public String getConfirmPassword() {
-		return confirmPassword;
-	}
-
-	public void setConfirmPassword(String confirmPassword) {
-		this.confirmPassword = confirmPassword;
+		return this.userId;
 	}
 
 	@Override
-	public String toString() {
-		return "User [userId=" + userId + ", firstName=" + firstName + ", lastName=" + lastName + ", emailId=" + emailId
-				+ ", contactNo=" + contactNo + ", dateOfBirth=" + dateOfBirth + ", gender=" + gender + ", bloodGroup="
-				+ bloodGroup + ", address=" + address + ", password=" + password + ", confirmPassword="
-				+ confirmPassword + "]";
+	public Collection<? extends GrantedAuthority> getAuthorities() {
+		// TODO Auto-generated method stub
+		return null;
 	}
-	
+
+	@Override
+	public String getUsername() {
+		// TODO Auto-generated method stub
+		return this.emailId;
+	}
+
+	@Override
+	public boolean isAccountNonExpired() {
+		// TODO Auto-generated method stub
+		return true;
+	}
+
+	@Override
+	public boolean isAccountNonLocked() {
+		// TODO Auto-generated method stub
+		return true;
+	}
+
+	@Override
+	public boolean isCredentialsNonExpired() {
+		// TODO Auto-generated method stub
+		return true;
+	}
+
+	@Override
+	public boolean isEnabled() {
+		// TODO Auto-generated method stub
+		return true;
+	}
+
+
+	@Override
+	public String getPassword() {
+		// TODO Auto-generated method stub
+		return this.password;
+	}
+
+
 }

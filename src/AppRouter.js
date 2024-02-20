@@ -5,6 +5,12 @@ import BookTest from "./component/BookTest";
 import UploadPrescription from "./component/UploadPrescription";
 import DownloadReport from "./component/DownloadReport";
 import Contact from "./component/Contact";
+import Cart from "./component/Cart";
+import Login from "./LandingPage/Login";
+import Signup from "./LandingPage/Signup";
+import DisplayReports from "./component/DisplayReports";
+import DoctorRegistration from "./component/DoctorRegistration";
+import TestDetails from "./component/TestDetails";
 
 const router = createBrowserRouter([
   {
@@ -28,10 +34,30 @@ const router = createBrowserRouter([
         element: <DownloadReport />,
       },
       {
+        path: "doctor",
+        element: <DoctorRegistration />,
+      },
+      {
         path: "contact",
         element: <Contact />,
       },
+      {
+        path: "cart",
+        element: <Cart />,
+      },
+      {
+        path: "/test-details/:testId",
+        element: <TestDetails />,
+      },
     ],
+  },
+  {
+    path: "login",
+    element: <Login />,
+  },
+  {
+    path: "signup",
+    element: <Signup />,
   },
 ]);
 

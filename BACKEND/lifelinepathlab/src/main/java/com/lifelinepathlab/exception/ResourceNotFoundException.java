@@ -6,17 +6,17 @@ import org.springframework.http.HttpStatus;
 @ResponseStatus(HttpStatus.NOT_FOUND)
 public class ResourceNotFoundException extends RuntimeException{
 	
-	private int userId;
+	private int id;
 	
-	public ResourceNotFoundException(String msg, int userId) {
+	public ResourceNotFoundException(String msg, int id) {
 		super(msg);
-		this.userId=userId;
+		this.id=id;
 	}
 	
 	@Override 
 	public String getMessage() {
 		String msg = super.getMessage();
-		String finalMessage = msg + "===>" + userId;
+		String finalMessage = msg + "===>" + id;
 		return finalMessage;
 	}
 
